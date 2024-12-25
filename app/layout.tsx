@@ -1,4 +1,6 @@
-import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/Navbar";
+import QueryProvider from "@/utils/queryProvider";
+import { ThemeProvider } from "@/utils/theme-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -28,14 +30,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="mx-auto min-h-screen max-w-6xl py-10">
+              <Navbar />
+              {children}
+            </main>
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
